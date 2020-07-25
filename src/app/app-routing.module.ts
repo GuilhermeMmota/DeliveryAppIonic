@@ -18,10 +18,6 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./users/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
-  {
-    path: 'cardapio-list',
-    loadChildren: () => import('./cardapio/cardapio-list/cardapio-list.module').then( m => m.CardapioListPageModule)
-  }
 ];
 @NgModule({
   imports: [

@@ -9,7 +9,23 @@ const routes: Routes = [
     children: [
       {
         path: 'cardapio',
-        loadChildren: () => import('../cardapio/cardapio-list/cardapio-list.module').then(m => m.CardapioListPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../cardapio/cardapio-list/cardapio-list.module')
+              .then(m => m.CardapioListPageModule),
+          },
+          {
+            path: 'new',
+            loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
+              .then(m => m.CardapioItemFormPageModule)
+          },
+          {
+            path: 'shopping-cart',
+            loadChildren: () => import('../cardapio/shopping-cart/shopping-cart.module')
+              .then( m => m.ShoppingCartPageModule)
+          }
+        ]
       },
       {
         path: 'tab2',
