@@ -21,19 +21,45 @@ const routes: Routes = [
               .then(m => m.CardapioItemFormPageModule)
           },
           {
-            path: 'shopping-cart',
-            loadChildren: () => import('../cardapio/shopping-cart/shopping-cart.module')
-              .then( m => m.ShoppingCartPageModule)
+            path: 'edit/:id',
+            loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
+              .then(m => m.CardapioItemFormPageModule)
           }
         ]
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'checkout',
+        children: [
+          {
+            path: '',
+            redirectTo: '/tabs/cardapio',
+            pathMatch: 'full'
+          },
+          {
+            path: 'shopping-cart',
+            loadChildren: () => import('../checkout/shopping-cart/shopping-cart.module')
+              .then(m => m.ShoppingCartPageModule)
+          },
+          {
+            path: 'delivery',
+            loadChildren: () => import('../checkout/delivery/delivery.module')
+              .then(m => m.DeliveryPageModule)
+          },
+          {
+            path: 'payment',
+            loadChildren: () => import('../checkout/payment/payment.module').then(m => m.PaymentPageModule)
+          }
+        ]
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'orders',
+        loadChildren: () => import('../orders/order-list/order-list.module')
+          .then(m => m.OrderListPageModule)
+      },
+      {
+        path: 'restaurant',
+        loadChildren: () => import('../restaurants/restaurant-info/restaurant-info.module')
+          .then(m => m.RestaurantInfoPageModule)
       },
       {
         path: '',

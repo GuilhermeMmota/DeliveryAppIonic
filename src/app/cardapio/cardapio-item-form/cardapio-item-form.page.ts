@@ -1,5 +1,5 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cardapio-item-form',
@@ -31,7 +31,6 @@ export class CardapioItemFormPage implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/tabs/cardapio/shopping-cart']);
+    this.router.navigate(['/tabs/checkout/shopping-cart']);
   }
-
 }
