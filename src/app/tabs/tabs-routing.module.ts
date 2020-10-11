@@ -1,6 +1,8 @@
+import { OpenCloseGuard } from './../restaurants/shared/open-close.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuard } from '../core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,19 +18,22 @@ const routes: Routes = [
               .then(m => m.CardapioListPageModule),
           },
           {
-            path: 'new',
+            path: 'new/:productId',
             loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
-              .then(m => m.CardapioItemFormPageModule)
+              .then(m => m.CardapioItemFormPageModule),
+            canActivate: [AuthGuard, OpenCloseGuard]
           },
           {
-            path: 'edit/:id',
+            path: 'edit/:productId/:itemId',
             loadChildren: () => import('../cardapio/cardapio-item-form/cardapio-item-form.module')
-              .then(m => m.CardapioItemFormPageModule)
+              .then(m => m.CardapioItemFormPageModule),
+            canActivate: [AuthGuard, OpenCloseGuard]
           }
         ]
       },
       {
         path: 'checkout',
+        canActivate: [AuthGuard, OpenCloseGuard],
         children: [
           {
             path: '',
@@ -54,12 +59,32 @@ const routes: Routes = [
       {
         path: 'orders',
         loadChildren: () => import('../orders/order-list/order-list.module')
-          .then(m => m.OrderListPageModule)
+          .then(m => m.OrderListPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'restaurant',
         loadChildren: () => import('../restaurants/restaurant-info/restaurant-info.module')
           .then(m => m.RestaurantInfoPageModule)
+      },
+      {
+        path: 'user',
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../users/user-info/user-info.module')
+              .then(m => m.UserInfoPageModule),
+          },
+          {
+            path: 'personal-info',
+            loadChildren: () => import('../users/personal-info/personal-info.module').then(m => m.PersonalInfoPageModule)
+          },
+          {
+            path: 'change-password',
+            loadChildren: () => import('../users/change-password/change-password.module').then(m => m.ChangePasswordPageModule)
+          }
+        ]
       },
       {
         path: '',
@@ -79,4 +104,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

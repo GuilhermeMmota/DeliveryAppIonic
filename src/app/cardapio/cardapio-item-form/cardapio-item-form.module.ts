@@ -6,7 +6,6 @@ import { SharedModule } from './../../core/modules/shared/shared.module';
 import { CardapioItemFormPageRoutingModule } from './cardapio-item-form-routing.module';
 import { CardapioItemFormPage } from './cardapio-item-form.page';
 
-
 @NgModule({
   imports: [
     CommonModule,
